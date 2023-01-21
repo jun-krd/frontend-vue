@@ -38,11 +38,13 @@ export default {
     })
 
     const submit = () => {
-      axios.post("/api/login", state.form).then((res)=>{
-        store.commit('setAccount', res.data);
-        console.log("data : "+res.data);
-        sessionStorage.setItem("id", res.data);
+      axios.post("/api/auth/signin", state.form).then((res)=>{
+        store.commit('setAccount', 1);
+        store.commit('setRoles', res.data.roles);
+        console.log("data : "+res.data.roles);
+        //sessionStorage.setItem("id", res.data);
         router.push({path: "/"});
+        axios.defaults.headers.common['Authorization'] = 'Bearer '+ res.data.token;
         window.alert("로그인하였습니다.");
       }).catch(()=>{
         window.alert("로그인 정보가 존재하지 않습니다.");

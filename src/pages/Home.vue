@@ -9,6 +9,8 @@
            <p>
              <a href="#" class="btn btn-primary my-2">Main call to action</a>
              <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+             <router-link to="/admin">Admin</router-link>
+             <router-link to="/user">User</router-link>
            </p>
          </div>
        </div>
@@ -30,7 +32,7 @@
  </template>
 
  <script>
- import axios from "axios";
+ //import axios from "axios";
  import {reactive} from "vue";
  import Card from "@/components/Card.vue";
 
@@ -42,11 +44,18 @@
        items:[]
      })
 
-     axios.get("/api/items").then(({data})=>{
+     /*axios.get("/api/items").then(({data})=>{
        state.items = data;
-     })
+     })*/
 
      return {state}
+   },
+   computed : {
+     setrole() {
+       const a = this.$store.state.account.role;
+       window.alert(a);
+       return this.$state.account.role;
+     },
    }
  }
  </script>
